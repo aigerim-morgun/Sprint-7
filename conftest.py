@@ -1,7 +1,7 @@
 import pytest
 import requests
 
-from helpers import register_new_courier_and_return_login_password
+from courier_methods import register_new_courier_and_return_login_password
 from urls import BASE_URL, LOGIN_COURIER, CREATE_COURIER
 
 

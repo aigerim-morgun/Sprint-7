@@ -1,3 +1,4 @@
+import allure
 import requests
 
 from urls import BASE_URL, GET_ORDERS
@@ -5,8 +6,13 @@ from urls import BASE_URL, GET_ORDERS
 
 class TestGetOrders:
 
+    @allure.title("Получение списка заказов")
     def test_get_orders(self):
-        response = requests.get(BASE_URL + GET_ORDERS)
+
+        with allure.step("Получить список заказов"):
+            response = requests.get(BASE_URL + GET_ORDERS)
+
+        body = response.json()
 
         assert response.status_code == 200
-        assert "orders" in response.json()
+        assert "orders" in body
