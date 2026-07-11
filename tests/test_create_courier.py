@@ -55,7 +55,7 @@ class TestCreateCourier:
         body = response.json()
 
         assert response.status_code == 400
-        assert "message" in body
+        assert body["message"] == "Недостаточно данных для создания учетной записи"
 
     @allure.title("Создание курьера без пароля")
     def test_create_without_password(self):
@@ -70,7 +70,7 @@ class TestCreateCourier:
         body = response.json()
 
         assert response.status_code == 400
-        assert "message" in body
+        assert body["message"] == "Недостаточно данных для создания учетной записи"
 
     @allure.title("Создание курьера без обязательных полей")
     def test_create_without_required_fields(self):
@@ -82,4 +82,4 @@ class TestCreateCourier:
         body = response.json()
 
         assert response.status_code == 400
-        assert "message" in body
+        assert body["message"] == "Недостаточно данных для создания учетной записи"

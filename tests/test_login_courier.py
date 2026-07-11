@@ -33,7 +33,7 @@ class TestLoginCourier:
         body = response.json()
 
         assert response.status_code == 400
-        assert "message" in body
+        assert body["message"] == "Недостаточно данных для входа"
 
     @allure.title("Авторизация без пароля")
     def test_login_without_password(self, create_courier):
@@ -43,12 +43,12 @@ class TestLoginCourier:
 
         with allure.step("Отправить запрос без пароля"):
             response = requests.post(BASE_URL + LOGIN_COURIER, data=payload)
+        
+        body = response.json()
 
-        assert response.status_code in [400, 504]
+        assert response.status_code == 400
+        assert body["message"] == "Недостаточно данных для входа"
 
-        if response.status_code == 400:
-            body = response.json()
-            assert "message" in body
 
     @allure.title("Авторизация с неверным логином")
     def test_login_with_wrong_login(self, create_courier):
